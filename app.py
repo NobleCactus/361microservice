@@ -1,8 +1,9 @@
 #This is the headline, noun, and verb generator microservice for CS_361
 
 from flask import Flask, request, jsonify
-app = Flask(__name__)
 import random
+app = Flask(__name__)
+
 
 noun_dictionary_all = {0: "Man", 1: "Woman", 2: "Child", 3: "Mayor",
                     4: "Policeman", 5: "Firefighter", 6: "Doctor", 7: "Lawyer",
@@ -78,22 +79,18 @@ def generate_verb():
     verb = verb_dictionary_all[random.randint(0, (len(verb_dictionary_all.keys())-1))]
     return verb
 
-
-
 @app.route('/noun', methods=['GET'])
 def respond():
-
     return generate_noun()
 
 @app.route('/verb', methods=['GET'])
 def verb_response():
-
-       return "Verb"
+       return generate_verb()
 
 @app.route('/', methods=['GET'])
 def headline_response():
     horse = "HORSE"
-    return horse
+    return generate_headline()
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
