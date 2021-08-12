@@ -1,1 +1,1 @@
-web: gunicorn 361microservice.py --log-file=-
+web: gunicorn app:361microservice
