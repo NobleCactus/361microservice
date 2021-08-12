@@ -47,7 +47,7 @@ def post_something():
 @app.route('/', methods=['GET'])
 def index():
     horse = "HORSE"
-    return "<h1>" + horse +"</h1>"
+    return horse
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
