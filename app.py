@@ -81,16 +81,16 @@ def generate_verb():
     return verb
 
 
-@app.route('/headline', methods=['GET'])
-def respond():
+@app.route('/', methods=['GET'])
+def headline_response():
     return generate_headline()
 
 @app.route('/noun', methods=['GET'])
-def post_something():
+def noun_response():
     return generate_noun()
 
-@app.route('/headline', methods=['GET'])
-def index():
+@app.route('/verb', methods=['GET'])
+def verb_response():
     return generate_verb()
 
 if __name__ == '__main__':
