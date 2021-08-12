@@ -1,1 +1,1 @@
-web: gunicorn app:361microservice
+web: gunicorn app:app
