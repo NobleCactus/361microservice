@@ -44,9 +44,10 @@ def post_something():
         })
 
 # A welcome message to test our server
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
-    return "<h1>Welcome to our server !!</h1>"
+    horse = "HORSE"
+    return "<h1>" + horse +"</h1>"
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
