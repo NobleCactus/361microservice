@@ -1,5 +1,9 @@
 #This is the headline, noun, and verb generator microservice for CS_361
 
+from flask import Flask, request, jsonify
+app = Flask(__name__)
+import random
+
 noun_dictionary_all = {0: "Man", 1: "Woman", 2: "Child", 3: "Mayor",
                     4: "Policeman", 5: "Firefighter", 6: "Doctor", 7: "Lawyer",
                     8: "Teacher", 9: "Husband", 10: "Wife", 11: "City Hall",
@@ -75,13 +79,11 @@ def generate_verb():
     return verb
 
 
-from flask import Flask, request, jsonify
-app = Flask(__name__)
 
 @app.route('/noun', methods=['GET'])
 def respond():
 
-    return "Noun"
+    return generate_noun()
 
 @app.route('/verb', methods=['GET'])
 def verb_response():
