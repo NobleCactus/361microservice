@@ -1,19 +1,53 @@
 #This is the headline, noun, and verb generator microservice for CS_361
 
-from flask import Flask
-from datetime import datetime
+# app.py
+from flask import Flask, request, jsonify
 app = Flask(__name__)
 
+@app.route('/getmsg/', methods=['GET'])
+def respond():
+    # Retrieve the name from url parameter
+    name = request.args.get("name", None)
+
+    # For debugging
+    print(f"got name {name}")
+
+    response = {}
+
+    # Check if user sent a name at all
+    if not name:
+        response["ERROR"] = "no name found, please send a name."
+    # Check if the user entered a number not a name
+    elif str(name).isdigit():
+        response["ERROR"] = "name can't be numeric."
+    # Now the user entered a valid name
+    else:
+        response["MESSAGE"] = f"Welcome {name} to our awesome platform!!"
+
+    # Return the response in json format
+    return jsonify(response)
+
+@app.route('/post/', methods=['POST'])
+def post_something():
+    param = request.form.get('name')
+    print(param)
+    # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
+    if param:
+        return jsonify({
+            "Message": f"Welcome {name} to our awesome platform!!",
+            # Add this option to distinct the POST request
+            "METHOD" : "POST"
+        })
+    else:
+        return jsonify({
+            "ERROR": "no name found, please send a name."
+        })
+
+# A welcome message to test our server
 @app.route('/')
-def homepage():
-    the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
-
-    return """
-    <h1>Hello heroku</h1>
-    <p>It is currently {time}.</p>
-
-    <img src="http://loremflickr.com/600/400">
-    """.format(time=the_time)
+def index():
+    return "<h1>Welcome to our server !!</h1>"
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True)
+    # Threaded option to enable multiple instances for multiple user access support
+    app.run(threaded=True, port=5000)
